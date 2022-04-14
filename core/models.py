@@ -9,7 +9,7 @@ class Place(models.Model):
 class House(models.Model):
     name = models.CharField(max_length=250)
     place = models.ForeignKey(Place, on_delete=models.CASCADE)
-    pictures = models.ImageField(upload_to='/images')
+    pictures = models.ImageField(upload_to='images')
     price = models.IntegerField()
     description = models.TextField()
 
