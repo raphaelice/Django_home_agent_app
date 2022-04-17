@@ -1,0 +1,23 @@
+{
+  "name": "home_app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx tailwindcss -i ./src/styles.css -o ./core/static/core/css/styles.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raphaelice/Home_agent_app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/raphaelice/Home_agent_app/issues"
+  },
+  "homepage": "https://github.com/raphaelice/Home_agent_app#readme",
+  "dependencies": {
+    "tailwindcss": "^3.0.24"
+  }
+}

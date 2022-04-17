@@ -1,6 +1,6 @@
 from django.db import models
 
-class Place(models.Model):
+class Location(models.Model):
     name = models.CharField(max_length=120)
 
     def __str__(self):
@@ -8,7 +8,7 @@ class Place(models.Model):
 
 class House(models.Model):
 
-    TYPE = (
+    STYLE = (
         ('SC', 'Self-contain'),
         ('1RA', 'One room apartment'),
         ('2RA', 'Two room apartment'),
@@ -17,12 +17,15 @@ class House(models.Model):
     )
 
     name = models.CharField(max_length=250)
-    type = models.CharField(max_length=3, choices=TYPE)
-    place = models.ForeignKey(Place, on_delete=models.CASCADE)
-    pictures = models.ImageField(upload_to='core/static/core/images')
-    price = models.IntegerField()
+    style = models.CharField(max_length=3, choices=STYLE)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    pictures = models.ImageField(upload_to='core/static/core/images/')
+    price = models.PositiveIntegerField()
     water = models.BooleanField(default=False)
     occupied = models.BooleanField(default=False)
+    added_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
+
