@@ -1,52 +1,119 @@
-{% extends 'core/base.html' %}
+{% extends 'core/base.html' %} {% block content %}
 
-{% block content %}
+<div class="md:flex h-auto">
+  <!-- Filter Starts here -->
+  <aside class="hidden pt-20 md:block h-full md:w-1/4 p-8 bg-slate-800">
+    <h2 class="font-bold text-indigo-800 text-2xl mb-6">Filter your search</h2>
+    <form action=".">
+      <label class="text-slate-500 font-semibold" for="location"
+        >location</label
+      >
+      <div class="border mt-2 w-full pr-2 rounded-sm border-slate-500">
+        <select
+          class="bg-slate-400 rounded-sm m-1 w-full"
+          name="location-query"
+          id="location"
+        >
+          <option value="none" selected disabled hidden>
+            Select an option
+          </option>
+          {% for place in location %}
+          <option class="bg-slate-400" value="{{ place.id }}">
+            {{ place.name }}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+      <br />
 
-<!-- Filter Starts here -->
-<div class="flex h-screen">
-    <div class="bg-gray-500 w-1/4 p-8">
-        <h2 class="font-bold text-gray-200 text-2xl mb-6">Filter your search</h2>
-        <form action=".">
+      <label class="text-slate-500 font-semibold" for="style">Style</label>
+      <div class="border mt-2 w-full pr-2 rounded-sm border-slate-500">
+        <select
+          class="w-full bg-slate-400 rounded-sm m-1"
+          name="style-query"
+          id="style"
+        >
+          <option value="none" selected disabled hidden>
+            Select an option
+          </option>
+          {% for style in styles %}
+          <option
+            class="bg-slate-400 active:bg-indigo-800"
+            value="{{ style.0 }}"
+          >
+            {{ style.1 }}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+      <br />
 
-            <label class="text-gray-200" for="location">location</label>
-            <select class="w-full rounded-sm mb-2" name="location-query" id="location">
-                <option value="none" selected disabled hidden>Select an option</option>
-                {% for place in location %} 
-                <option value="{{ place.id }}">{{ place.name }}</option>
-                {% endfor %}
-            </select><br>
+      <label class="text-slate-500 font-semibold" for="price">Budget</label>
+      <div class="border mt-2 w-full pr-2 rounded-sm border-slate-500">
+        <input
+          class="w-full rounded-sm m-1 bg-slate-400"
+          name="price-query"
+          type="number"
+        />
+      </div>
+      <br />
 
-            <label class="text-gray-200" for="style">Style</label>
-            <select class="w-full rounded-sm mb-2" name="style-query" id="style">
-                <option value="none" selected disabled hidden>Select an option</option>
-                {% for style in styles %}
-                <option value="{{ style.0 }}">{{ style.1 }}</option>
-                {% endfor %}
-            </select><br>
+      <label class="text-slate-500 font-semibold" for="water"
+        >water availability</label
+      >
+      <input
+        class="mb-2 form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-purple-500 checked:border-purple-500 transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain cursor-pointer"
+        name="water-query"
+        type="checkbox"
+      /><br />
 
-            <label class="text-gray-200" for="price">Budget</label>
-            <input class="w-full rounded-sm mb-2" name="price-query" type="number"><br>
+      <label class="text-slate-500 font-semibold" for="occupied">Vacant</label>
+      <input
+        class="mb-2 form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-indigo-500 checked:border-indigo-500 transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain cursor-pointer"
+        name="vacancy-query"
+        type="checkbox"
+        checked
+      /><br />
 
-            <label class="text-gray-200" for="water">water availability</label>
-            <input class="mb-2" name="water-query" type="checkbox"><br>
+      <button
+        class="px-12 py-2 my-5 bg-indigo-800 rounded-md text-slate-900 font-bold hover:bg-slate-900 border border-indigo-800 hover:text-indigo-800"
+        type="submit"
+      >
+        APPLY
+      </button>
+    </form>
+  </aside>
 
-            <label class="text-gray-200" for="occupied">Occupied</label>
-            <input class="mb-2" name="occupied-query" type="checkbox" checked><br>
-
-            <button class="px-12 py-2 mt-5 bg-purple-900 rounded-md text-gray-200 font-bold" type="submit">Apply</button>
-        </form>
+  <!-- Results Starts here -->
+  <main class="w-full lg:mx-9 md:w-3/4 p-8">
+    <div class="pt-20 grid lg:grid-cols-4 md:grid-cols-2 md:gap-4 lg:gap-6">
+      {% for house in queryset %}
+      <a
+        href="{{ house.get_absolute_url }}"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <div class="mb-12 h-52 bg-slate-800 rounded-md">
+          <img
+            class="rounded-md max-w-full h-3/5 w-full"
+            loading="lazy"
+            src="{{ house.image_set.all.0.image.url }}"
+            alt=""
+          />
+          <div class="flex justify-start flex-col pt-2 pl-2">
+            <h3 class="font-bold text-slate-500">{{ house.location }}</h3>
+            <h2 class="font-bold font-mono text-indigo-800 text-2xl">
+              N{{ house.first_price }}/<span class="text-base">1st yr</span>
+            </h2>
+          </div>
+        </div>
+      </a>
+      {% empty %}
+      <h1 class="font-bold text-center text-gray-800 text-3xl h-screen">
+        No Appartment Matched Your Search...
+      </h1>
+      {% endfor %}
     </div>
-
-
-
-<!-- Results Starts here -->
-    <div class="grid bg-gray-200 w-3/4 p-8">
-       <h2 class="font-bold text-gray-800 text-2xl">Results</h2> 
-    {% for house in queryset %}
-    <div>
-        <img src="{{ house.pictures.url }}" alt="">
-    </div>
-    {% endfor %}
-</div>
+  </main>
 </div>
 {% endblock %}

@@ -1,5 +1,92 @@
-{% extends 'core/base.html' %}
+{% extends 'core/base.html' %} {% block content %}
+<main class="mb-14 md:mt-16 sm:flex sm:justify-center">
+  <div
+    class="md:bg-slate-800 sm:w-3/4 lg:w-3/5 md:rounded-md md:p-4 md:flex md:justify-center"
+  >
+    <div class="relative overflow-hidden m-4 md:m-8">
+      {% for image in object.image_set.all %}
+      <img
+        class="hidden shadow-md rounded-md carousel__image h-48 w-80 md:h-56 md:w-96"
+        src="{{ image.image.url }}"
+        alt=""
+      />
+      {% endfor %}
+      <div
+        class="absolute top-1/2 -translate-y-1/2 w-full flex justify-between"
+      >
+        <button
+          id="previous"
+          class="ml-4 font-bold text-slate-900 w-8 focus:bg-slate-400 h-8 border-2 rounded-full border-slate-900"
+          aria-label="Previous slide"
+        >
+          <
+        </button>
+        <button
+          id="next"
+          class="mr-4 font-bold text-slate-900 w-8 focus:bg-slate-400 h-8 border-2 rounded-full border-slate-900"
+          aria-label="Next slide"
+        >
+          >
+        </button>
+      </div>
+    </div>
+    <div class="m-4">
+      <div class="border-b border-slate-500">
+        <div class="flex justify-between md:my-5">
+          <h2
+            class="font-bold text-base text-slate-500 md:font-black md:text-xl"
+          >
+            {{ object.location }}
+          </h2>
+          {% if object.vacant %}
+          <h2
+            class="px-2 py-px border border-pink-500 rounded-full text-base text-pink-500"
+          >
+            Vacant
+          </h2>
+          {% else %}
+          <h2
+            class="px-2 py-px border border-pink-500 rounded-full text-base text-pink-500"
+          >
+            Occupied
+          </h2>
+          {% endif %}
+        </div>
 
-{% block content %}
+        <h2 class="font-black text-xl text-indigo-800 pb-2 md:text-2xl md:pb-4">
+          {{ object.name }}
+        </h2>
+      </div>
+      <div class="mt-4">
+        <h2 class="font-bold text-base text-indigo-800">
+          {{ object.get_style_display }}
+        </h2>
+        <p class="text-slate-500 font-semibold font-mono">
+          N{{ object.first_price }} 1st yr
+        </p>
+        <p class="text-slate-500 font-semibold font-mono">
+          N{{ object.subsequent_price }} subsequently
+        </p>
+        {% if object.water %}
+        <p class="text-slate-500 font-semibold">Water is available!</p>
+        {% else %}
+        <p class="text-slate-500 font-semibold">Water is limited</p>
+        {% endif %}
+
+        <div class="flex justify-center mt-8 gap-2">
+          <a
+            href="{% url 'home' %}"
+            class="border border-indigo-800 rounded-md bg-indigo-800 text-slate-900 px-3 py-1 font-bold hover:bg-slate-900 hover:text-indigo-800"
+            >Back</a
+          >
+          <a
+            class="border border-indigo-800 rounded-md bg-indigo-800 text-slate-900 px-3 py-1 font-bold hover:bg-slate-900 hover:text-indigo-800"
+            >Contact Us</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
 
 {% endblock %}
