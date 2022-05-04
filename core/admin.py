@@ -7,7 +7,8 @@ class ImageModelAdmin(admin.StackedInline):
 
 class HouseModelAdmin(admin.ModelAdmin):
     inlines = [ImageModelAdmin]
+    list_display = ('name', 'location')
 
-admin.site.register(models.Image)
 admin.site.register(models.House, HouseModelAdmin)
 admin.site.register(models.Location)
+admin.site.site_header = "Dinel's Agency"

@@ -2,7 +2,7 @@
 
 <div class="md:flex h-auto">
   <!-- Filter Starts here -->
-  <aside class="hidden pt-20 md:block h-full md:w-1/4 p-8 bg-slate-800">
+  <aside id="filter" class="hidden pt-20 md:block h-full md:w-1/4 p-8 bg-slate-800">
     <h2 class="font-bold text-indigo-800 text-2xl mb-6">Filter your search</h2>
     <form action=".">
       <label class="text-slate-500 font-semibold" for="location"
@@ -90,8 +90,6 @@
       {% for house in queryset %}
       <a
         href="{{ house.get_absolute_url }}"
-        target="_blank"
-        rel="noopener noreferrer"
       >
         <div class="mb-12 h-52 bg-slate-800 rounded-md">
           <img
