@@ -2,7 +2,10 @@
 
 <div class="md:flex h-auto">
   <!-- Filter Starts here -->
-  <aside id="filter" class="hidden pt-20 md:block h-full md:w-1/4 p-8 bg-slate-800">
+  <aside
+    id="filter"
+    class="md:block hidden pt-20 md:w-1/4 p-8 bg-slate-800"
+  >
     <h2 class="font-bold text-indigo-800 text-2xl mb-6">Filter your search</h2>
     <form action=".">
       <label class="text-slate-500 font-semibold" for="location"
@@ -86,11 +89,10 @@
 
   <!-- Results Starts here -->
   <main class="w-full lg:mx-9 md:w-3/4 p-8">
+    {% if queryset.exists %}
     <div class="pt-20 grid lg:grid-cols-4 md:grid-cols-2 md:gap-4 lg:gap-6">
       {% for house in queryset %}
-      <a
-        href="{{ house.get_absolute_url }}"
-      >
+      <a href="{{ house.get_absolute_url }}">
         <div class="mb-12 h-52 bg-slate-800 rounded-md">
           <img
             class="rounded-md max-w-full h-3/5 w-full"
@@ -106,12 +108,12 @@
           </div>
         </div>
       </a>
-      {% empty %}
+      {% endfor %} {% else %}
       <h1 class="font-bold text-center text-gray-800 text-3xl h-screen">
         No Appartment Matched Your Search...
       </h1>
-      {% endfor %}
     </div>
+    {% endif %}
   </main>
 </div>
 {% endblock %}

@@ -7,8 +7,8 @@ const filter = document.getElementById("filter");
 let totalSlide = 0;
 let slidePosition = 0;
 
-if (filter || menu) {
-    filter.style.display = 'none'
+
+if (filter && menu) {
     menu.addEventListener('click', () => {
         if (filter.style.display === 'none') {
             filter.style.display = 'block'

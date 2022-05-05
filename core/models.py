@@ -54,7 +54,7 @@ class Image(models.Model):
 def delete_pictures(sender, instance, *args, **kwargs):
     if instance.image:
         os.remove(instance.image.path)
-
+        
 @receiver(post_save, sender=House)
 def send_email(sender, instance, *args, **kwargs):
     sender_email = User.objects.filter(is_superuser=True)[0].email
