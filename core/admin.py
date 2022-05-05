@@ -11,4 +11,5 @@ class HouseModelAdmin(admin.ModelAdmin):
 
 admin.site.register(models.House, HouseModelAdmin)
 admin.site.register(models.Location)
+admin.site.register(models.Style)
 admin.site.site_header = "Dinel's Agency"

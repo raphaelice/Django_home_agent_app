@@ -14,20 +14,16 @@ class Location(models.Model):
     def __str__(self):
         return self.name
 
+class Style(models.Model):
+    name = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.name
 
 class House(models.Model):
 
-    STYLE = (
-        ('SC', 'Self-contain'),
-        ('1RA', 'One room apartment'),
-        ('2RA', 'Two room apartment'),
-        ('3RA', 'Three room apartment'),
-        ('4RA', 'Four room apartment')
-    )
-
     name = models.CharField(max_length=250)
-    style = models.CharField(max_length=3, choices=STYLE)
+    style = models.ForeignKey(Style, null=True, on_delete=models.SET_NULL)
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
     first_price = models.PositiveIntegerField()
     subsequent_price = models.PositiveIntegerField()

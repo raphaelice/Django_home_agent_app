@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import DetailView, View, TemplateView
-from core.models import House, Location
+from core.models import House, Location, Style
 
 class IndexView(View):
     template_name = 'core/index.html'
@@ -14,7 +14,7 @@ class IndexView(View):
         vacancy_query = request.GET.get('vacancy-query')
 
         if style_query is not None and style_query.strip() != '':
-            queryset = queryset.filter(style=style_query)
+            queryset = queryset.filter(style__id=style_query)
         
         if location_query is not None and location_query.strip() != '':
             queryset = queryset.filter(location=Location.objects.get(pk=location_query))
@@ -31,7 +31,7 @@ class IndexView(View):
         context = {
             'location': Location.objects.all(),
             'queryset': queryset,
-            'styles': House.STYLE,
+            'styles': Style.objects.all(),
         }
         return render(request, self.template_name, context)
 
