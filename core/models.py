@@ -48,7 +48,7 @@ class Image(models.Model):
 
 @receiver(post_delete, sender=Image)
 def delete_pictures(sender, instance, *args, **kwargs):
-    if instance.image:
+    if instance.image and instance.image.path:
         os.remove(instance.image.path)
         
 @receiver(post_save, sender=House)
