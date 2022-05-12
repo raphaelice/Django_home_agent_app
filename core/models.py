@@ -53,6 +53,5 @@ def delete_pictures(sender, instance, *args, **kwargs):
         
 @receiver(post_save, sender=House)
 def send_email(sender, instance, *args, **kwargs):
-    sender_email = User.objects.filter(is_superuser=True)[0].email
     if not instance.vacant:
-        send_mail('Purchase Successful', 'A house has been bought!', sender_email, settings.PARTNER_EMAIL)
+        send_mail('Purchase Successful', 'A house has been bought!', settings.EMAIL_HOST_USER, settings.EMAIL_HOST_USER)

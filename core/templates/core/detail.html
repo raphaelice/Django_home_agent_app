@@ -1,9 +1,9 @@
 {% extends 'core/base.html' %} {% block content %}
-<main class="mb-14 md:mt-16 sm:flex sm:justify-center">
+<main class="mb-20 md:mt-16 flex justify-center">
   <div
     class="md:bg-slate-800 sm:w-3/4 lg:w-3/5 md:rounded-md md:p-4 md:flex md:justify-center"
   >
-    <div class="relative overflow-hidden m-4 md:m-8">
+    <div class="relative overflow-hidden m-4 md:m-8 w-72">
       {% for image in object.image_set.all %}
       <img
         class="hidden shadow-md rounded-md carousel__image h-48 w-80 md:h-56 md:w-96"
@@ -16,14 +16,14 @@
       >
         <button
           id="previous"
-          class="ml-4 font-bold text-slate-900 w-8 focus:bg-slate-400 h-8 border-2 rounded-full border-slate-900"
+          class="ml-4 font-bold text-slate-800 w-8 focus:bg-slate-400 h-8 border-2 rounded-full border-slate-800"
           aria-label="Previous slide"
         >
           <
         </button>
         <button
           id="next"
-          class="mr-4 font-bold text-slate-900 w-8 focus:bg-slate-400 h-8 border-2 rounded-full border-slate-900"
+          class="mr-4 font-bold text-slate-800 w-8 focus:bg-slate-400 h-8 border-2 rounded-full border-slate-800"
           aria-label="Next slide"
         >
           >
@@ -80,7 +80,7 @@
             >Back</button
           >
           <a
-            href="#footer"
+            href="http://wa.me/%2B2347038677076"
             class="border border-indigo-800 rounded-md bg-indigo-800 text-slate-900 px-3 py-1 font-bold hover:bg-slate-900 hover:text-indigo-800"
             >Contact Us</a
           >
