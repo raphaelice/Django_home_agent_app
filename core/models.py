@@ -1,9 +1,9 @@
 import os
-
+import cloudinary
 from django.db import models
 from django.conf import settings
 from django.shortcuts import reverse
-from django.db.models.signals import post_delete, post_save
+from django.db.models.signals import post_save
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.dispatch import receiver
@@ -45,12 +45,6 @@ class Image(models.Model):
     def __str__(self):
         return f"{self.house.name} images"
 
-
-@receiver(post_delete, sender=Image)
-def delete_pictures(sender, instance, *args, **kwargs):
-    if instance.image and instance.image.path:
-        os.remove(instance.image.path)
-        
 @receiver(post_save, sender=House)
 def send_email(sender, instance, *args, **kwargs):
     if not instance.vacant:
